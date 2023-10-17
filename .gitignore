@@ -2,4 +2,6 @@
 *.logs
 node_modules/
 .vscode/
+
+# so that git won't upload; nobody can see
 firebaseAPI_TEAM99.js
