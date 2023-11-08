@@ -44,11 +44,18 @@ function insertNameFromFirestore() {
 
 insertNameFromFirestore();
 
-function readQuote(day){
-    db.collection("quotes").doc(day).onSnapshot(dayInfo => {
+// Function to read the quote of the day from Firestore "quotes" collection
+// Input param is the String representing the day of the week, aka, the document name
+function readQuote(day) {
+    db.collection("quotes").doc(day).onSnapshot(dayInfo => {  //name of the collection and documents should matach excatly with what you have in Firestore
         console.log(dayInfo.data())
-        quoteOfTheDay = dayInfo.data().quote;
-        document.getElementById("quote-goes-here").innerHTML=quoteOfTheDay;
+        quoteOfTheDay = dayInfo.data().quote; //.data() returns data object
+        document.getElementById("quote-goes-here").innerHTML = quoteOfTheDay; //using javascript to display the data on the right place
+
+        //Here are other ways to access key-value data fields
+        //$('#quote-goes-here').text(dayDoc.data().quote);         //using jquery object dot notation
+        //$("#quote-goes-here").text(dayDoc.data()["quote"]);      //using json object indexing
+        //document.querySelector("#quote-goes-here").innerHTML = dayDoc.data().quote;
     })
 
 }
@@ -65,7 +72,7 @@ function writeHikes() {
         city: "Burnaby",
         province: "BC",
         level: "easy",
-				details: "A lovely place for lunch walk",
+        details: "A lovely place for lunch walk",
         length: 10,          //number value
         hike_time: 60,       //number value
         lat: 49.2467097082573,
@@ -91,7 +98,7 @@ function writeHikes() {
         city: "North Vancouver",
         province: "BC",
         level: "hard",
-        details:  "Amazing ski slope views",
+        details: "Amazing ski slope views",
         length: 8.2,        //number value
         hike_time: 120,     //number value
         lat: 49.38847101455571,
@@ -107,7 +114,7 @@ function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("hikeCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection called "hikes"
-        .then(allHikes=> {
+        .then(allHikes => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             allHikes.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
@@ -119,10 +126,10 @@ function displayCardsDynamically(collection) {
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
-                newcard.querySelector('.card-length').innerHTML = hikeLength +"km";
+                newcard.querySelector('.card-length').innerHTML = hikeLength + "km";
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
-                newcard.querySelector('a').href = "eachHike.html?docID="+docID;
+                newcard.querySelector('a').href = "eachHike.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
