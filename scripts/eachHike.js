@@ -5,7 +5,6 @@ function displayHikeInfo() {
     let ID = params.searchParams.get("docID"); //get value for key "id"
     console.log(ID);
 
-    // doublecheck: is your collection called "Reviews" or "reviews"?
     db.collection("hikes")
         .doc(ID)
         .get()
@@ -25,13 +24,11 @@ displayHikeInfo();
 function saveHikeDocumentIDAndRedirect() {
     let params = new URL(window.location.href) //get the url from the search bar
     let ID = params.searchParams.get("docID");
-
-    localStorage.setItem("hikeID", ID); //make the key and value
+    localStorage.setItem("hikeDocID", ID); //make the key and value
     window.location.href = "review.html";
 }
 
 function populateReviews() {
-    console.log("test");
     let hikeCardTemplate = document.getElementById("reviewCardTemplate");
     let hikeCardGroup = document.getElementById("reviewCardGroup");
 

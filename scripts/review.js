@@ -1,17 +1,17 @@
-var hikeID = localStorage.getItem('hikeID')
+var hikeDocID = localStorage.getItem("hikeDocID") //global scope to visible throughout this page
 
-
-function displayHikeName() {
-    db.collection('hikes').doc(hikeID).get().then((thisHike) => {
-        hikeName = thisHike.data().name;
-        document.getElementById("hikeName").innerHTML = hikeName;
-    })
+function displayHikeName(id) {
+    db.collection("hikes")
+        .doc(hikeDocID)
+        .get()
+        .then((thisHike) => {
+            var hikeName = thisHike.data().name;
+            document.getElementById("hikeName").innerHTML = hikeName;
+        });
 }
-
-displayHikeName()
+displayHikeName(hikeDocID);
 
 // Add this JavaScript code to make stars clickable
-
 // Select all elements with the class name "star" and store them in the "stars" variable
 const stars = document.querySelectorAll('.star');
 
