@@ -1,6 +1,6 @@
 var hikeDocID = localStorage.getItem("hikeDocID") //global scope to visible throughout this page
 
-function displayHikeName(id) {
+function displayHikeName(hikeDocID) {
     db.collection("hikes")
         .doc(hikeDocID)
         .get()
